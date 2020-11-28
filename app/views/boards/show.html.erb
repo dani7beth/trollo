@@ -1,3 +1,18 @@
 <h1><%=@board.name%></h1>
 <%=link_to "Edit", edit_board_path(@board), class: 'ui orange button'%>
 <%=link_to "Delete", @board, method: :delete, class: "ui red button"%>
+<%=link_to 'New List', new_board_list_path(@board), class: "ui button"%>  
+<hr />
+<ul>
+<% @lists.each do |list|%>
+<li>
+<%=list.name%> 
+<br />
+<%=link_to "Edit List", edit_board_list_path(@board, list), class: 'ui button' %>
+<%=link_to "Delete List", board_list_path(@board, list), method: :delete, class: 'ui red button'%>
+</li>
+
+<% end %>
+</ul>
+ 
+
