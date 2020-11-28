@@ -4,15 +4,27 @@
 <%=link_to 'New List', new_board_list_path(@board), class: "ui button"%>  
 <hr />
 <ul>
-<% @lists.each do |list|%>
-<li>
-<%=list.name%> 
-<br />
-<%=link_to "Edit List", edit_board_list_path(@board, list), class: 'ui button' %>
-<%=link_to "Delete List", board_list_path(@board, list), method: :delete, class: 'ui red button'%>
-</li>
-
-<% end %>
+    <% @lists.each do |list|%>
+    <li>
+        <%=list.name%> 
+        <br />
+        <%=link_to "Edit List", edit_board_list_path(@board, list), class: 'ui button' %>
+        <%=link_to "Delete List", board_list_path(@board, list), method: :delete, class: 'ui red button'%>
+        <%=link_to "Add Task", new_list_task_path(list),class: 'ui green button'%>
+    </li>
+    <br />
+        <ul>
+            <%list.tasks.each do |task| %>
+            <li>
+            Task Name: <%=task.task_name%> <br />
+            Task Detail: <%=task.detail%> <br />
+            <%=link_to "Edit Task", edit_list_task_path(list, task), class: 'ui button' %>
+            <%=link_to "Delete Task", list_task_path(list, task), method: :delete, class: 'ui red button'%>
+            </li>
+            <% end %>
+        </ul>
+        
+    <% end %>
 </ul>
  
 
