@@ -36,7 +36,12 @@ class TasksController < ApplicationController
     @list= List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
     # tmppositions = []
-    @positions = []
+    current_task_pos = @task[:position]
+    next_task_pos = @task.next[:position]
+    current_task_pos = next_task_pos
+    @task[:position] = current_task_pos
+    next_task_pos = @task[:position]
+
     
   
     # @list.tasks.each_with_index do |task, i|

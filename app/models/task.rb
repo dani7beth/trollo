@@ -5,4 +5,11 @@ class Task < ApplicationRecord
     Task.find_by_sql("SELECT * FROM tasks AS t
                        WHERE t.list_id = #{list_id}")
   end
+
+  def next
+    self.class.where("id > ?", id).first
+  end
+  def previous
+    self.class.where("id < ?", id).last
+  end
 end
