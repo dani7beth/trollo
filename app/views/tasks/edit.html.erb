@@ -1,2 +1,22 @@
 <h1>Edit Task</h1>
-<%=render "form"%>
+
+<%= form_with(model: [@list, @task], local: true, class: "ui form") do |f| %>
+    <div class="field">
+        <%= f.label :task_name %>
+        <%= f.text_field :task_name, class: "input" %>
+    </div>
+    <div class="field">
+        <%= f.label :detail %>
+        <%= f.text_field :detail, class: "input"%>
+    </div>
+    <div class="field">
+        <%=f.label "Move to: "%>
+        <%= f.collection_select :list_id, List.order(:name),:id,:name%>
+    </div>
+    <div class="field">
+        <%=f.label "Presedence: "%>
+        <%=f.collection_select :position, @list.tasks.order(:position), :position, :position%>
+        
+    </div>
+    <%= f.submit nil, class: "ui button" %>
+<% end %>

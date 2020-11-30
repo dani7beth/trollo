@@ -1,11 +1,12 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:show,:edit,:update,:destroy]
+  before_action :set_board, only: [:show,:edit,:update,:destroy, :move_up]
   def index
-    @boards = current_user.boards
+    @boards = Board.all_boards(current_user.id)
   end
 
   def show
     @lists = @board.lists
+   
   end
 
   def new
@@ -38,6 +39,23 @@ class BoardsController < ApplicationController
     @board.destroy
     redirect_to boards_path
   end
+
+  # def move_up
+  #   # @tmp = ActiveRecord::Base.connection.execute("select last_value from tasks_id_seq").first["last_value"]
+  #   # @item = Task.find(@tmp)
+  #   # @tasks = Task.all
+  #   # task_ids = Task.pluck(:id)
+  #   # # task_ids.delete()
+  #   # # new_task_ids = 
+  #   # task_ids.each do |id|
+  #   #   new_task_ids << id
+  #   # end
+  #   # @tasks.sort_by {|task| new_task_ids.index(task.id)}
+    
+  #   @tasks = Task.all
+  #   @tasks = @tasks.sort_by{|t| -t[:id]}
+  #   @tasks
+  # end
 
   private
   def set_board

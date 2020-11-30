@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   
   def index
-    @lists = List.all
+    @board = Board.find(params[:board_id])
+    @lists = List.all_lists(@board)
     @tasks = @lists.tasks
   end
 
